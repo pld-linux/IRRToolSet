@@ -2,28 +2,23 @@ Summary:	IRRToolSet is a suite of policy analysis tools
 Summary(pl):	IRRToolSet jest zestawem narzêdzi do analizy polityki
 Name:		IRRToolSet
 Version:	4.7.3
-Release:	1
+Release:	1.1
 License:	BSD-like
 Group:		Networking/Admin
 Source0:	ftp://ftp.ripe.net/ripe/tools/IRRToolSet/%{name}-%{version}.tar.gz
 # Source0-md5:	fcf8305464c8ae5886c41dcb8d85e53d
 Patch0:		%{name}-DESTDIR.patch
+Patch1:		%{name}-gcc3.patch
 URL:		http://www.ripe.net/ripencc/pub-services/db/irrtoolset/index.html
+BuildRequires:	XFree86-devel
+BuildRequires:	bison
 BuildRequires:	flex
-BuildRequires:  gcc2-c++
+BuildRequires:  libstdc++-devel
 BuildRequires:	tcl-devel
 BuildRequires:	tk-devel
-Requires:	XFree86-libs
-Requires:	readline
-Requires:	tcl
-Requires:	tk
+BuildRequires:	readline-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	RAToolSet
-
-%define __cxx g++2
-%define __cc gcc2
-
-%define optflags -O3 -gstabs+ -frtti
 
 %description
 IRRToolSet is a suite of policy analysis tools. It is implemented in
@@ -35,6 +30,7 @@ IRRToolSet jest zestawem narzêdzi do analizy polityki.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 %configure2_13
