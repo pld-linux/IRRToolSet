@@ -13,7 +13,7 @@ URL:		http://www.ripe.net/ripencc/pub-services/db/irrtoolset/index.html
 BuildRequires:	XFree86-devel
 BuildRequires:	bison
 BuildRequires:	flex
-BuildRequires:  libstdc++-devel
+BuildRequires:	libstdc++-devel
 BuildRequires:	tcl-devel
 BuildRequires:	tk-devel
 BuildRequires:	readline-devel
