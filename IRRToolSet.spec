@@ -6,6 +6,7 @@ Release:	1
 License:	BSD-like
 Group:		Networking/Admin
 Source0:	ftp://ftp.ripe.net/ripe/tools/IRRToolSet/%{name}-%{version}.tar.gz
+# Source0-md5:	fcf8305464c8ae5886c41dcb8d85e53d
 Patch0:		%{name}-DESTDIR.patch
 URL:		http://www.ripe.net/ripencc/pub-services/db/irrtoolset/index.html
 BuildRequires:	tcl-devel
