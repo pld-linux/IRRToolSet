@@ -8,7 +8,7 @@ Group:		Networking/Admin
 Source0:	ftp://ftp.ripe.net/ripe/tools/IRRToolSet/%{name}-%{version}.tar.gz
 # Source0-md5:	fcf8305464c8ae5886c41dcb8d85e53d
 Patch0:		%{name}-DESTDIR.patch
-Patch1:		%{name}-gcc3.patch
+#Patch1:		%{name}-gcc3.patch
 URL:		http://www.ripe.net/ripencc/pub-services/db/irrtoolset/index.html
 BuildRequires:	XFree86-devel
 BuildRequires:	bison
@@ -31,7 +31,7 @@ IRRToolSet jest zestawem narzêdzi do analizy polityki.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
+#%patch1 -p1
 
 %build
 %configure2_13
