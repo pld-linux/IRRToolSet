@@ -38,7 +38,7 @@ IRRToolSet jest zestawem narzêdzi do analizy polityki.
 %{__make}
 
 # extract license
-head -53 acconfig.h | tail -52 > LICENSE
+head -n 53 acconfig.h | tail -n 52 > LICENSE
 
 %install
 rm -rf $RPM_BUILD_ROOT
