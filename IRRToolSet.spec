@@ -9,16 +9,16 @@ Source0:	ftp://ftp.ripe.net/ripe/tools/IRRToolSet/%{name}-%{version}.tar.gz
 # Source0-md5:	fcf8305464c8ae5886c41dcb8d85e53d
 Patch0:		%{name}-DESTDIR.patch
 URL:		http://www.ripe.net/ripencc/pub-services/db/irrtoolset/index.html
-BuildRequires:	tcl-devel
-BuildRequires:	tk-devel
 BuildRequires:	flex
 BuildRequires:  gcc2-c++
+BuildRequires:	tcl-devel
+BuildRequires:	tk-devel
 Requires:	XFree86-libs
 Requires:	readline
 Requires:	tcl
 Requires:	tk
-Obsoletes:	RAToolSet
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+Obsoletes:	RAToolSet
 
 %define __cxx g++2
 %define __cc gcc2
@@ -47,7 +47,8 @@ head -53 acconfig.h | tail -52 > LICENSE
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_sbindir}
 
-%{__make} install DESTDIR=$RPM_BUILD_ROOT
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 mv $RPM_BUILD_ROOT%{_bindir}/prtraceroute $RPM_BUILD_ROOT%{_sbindir}
 
