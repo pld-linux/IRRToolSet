@@ -1,0 +1,11 @@
+--- IRRToolSet-4.7.3/src/RtConfig/Makefile.in.orig	2002-03-27 14:56:38.000000000 +0100
++++ IRRToolSet-4.7.3/src/RtConfig/Makefile.in	2004-11-06 13:48:03.253744768 +0100
+@@ -25,7 +25,7 @@
+ CC              = @CC@
+ CXX             = @CXX@
+ BISON           = @YACC@
+-FLEX            = @LEX@
++FLEX            = @LEX@ -l
+ LD              = @LD@
+ PERL            = @PERL_PATH@
+ INSTALL         = @INSTALL@

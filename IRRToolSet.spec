@@ -9,6 +9,7 @@ Source0:	ftp://ftp.ripe.net/ripe/tools/IRRToolSet/%{name}-%{version}.tar.gz
 # Source0-md5:	fcf8305464c8ae5886c41dcb8d85e53d
 Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-gcc3.patch
+Patch2:		%{name}-flex.patch
 URL:		http://www.ripe.net/ripencc/pub-services/db/irrtoolset/index.html
 BuildRequires:	XFree86-devel
 BuildRequires:	automake
@@ -33,6 +34,7 @@ IRRToolSet jest zestawem narzêdzi do analizy polityki.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 cp -f /usr/share/automake/config.sub .
