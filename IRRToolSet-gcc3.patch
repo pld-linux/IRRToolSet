@@ -1813,3 +1813,293 @@
  
  void Schema::addClass(AttrClass *clss) {
     classes[lastClass++] = clss;
+--- IRRToolSet-4.7.3/src/aoe/aoe.hh.orig	Tue Apr  9 13:48:46 2002
++++ IRRToolSet-4.7.3/src/aoe/aoe.hh	Wed Jul  9 09:54:31 2003
+@@ -77,7 +77,7 @@
+ class ListPeer : public TclCommand
+ {
+    protected:
+-      virtual int command(int argc, char *argv[]);
++      virtual int command(int argc, const char *argv[]);
+ 
+    private:
+       int updateWindowTitle(TclApplication *pcApp, int iCategory, 
+@@ -105,7 +105,7 @@
+ class LoadBgpDump : public TclCommand
+ {
+    protected:
+-      virtual int command(int argc, char *argv[]);
++      virtual int command(int argc, const char *argv[]);
+ 
+    public:
+       LoadBgpDump(char *pzcName) : TclCommand(pzcName) {}
+@@ -115,7 +115,7 @@
+ class UpdatePolicy : public TclCommand
+ {
+    protected:
+-      virtual int command(int argc, char *argv[]);
++      virtual int command(int argc, const char *argv[]);
+ 
+    private:
+       int append(void);
+@@ -139,7 +139,7 @@
+ class EditPolicyText : public TclCommand
+ {
+    protected:
+-      virtual int command(int argc, char *argv[]);
++      virtual int command(int argc, const char *argv[]);
+ 
+    public:
+       EditPolicyText(char *pzcName) : TclCommand(pzcName) {} 
+@@ -148,7 +148,7 @@
+ class ShowPolicyText : public TclCommand
+ {
+    protected:
+-      virtual int command(int argc, char *argv[]);
++      virtual int command(int argc, const char *argv[]);
+ 
+    public:
+       ShowPolicyText(char *pzcName) : TclCommand(pzcName) {}
+@@ -157,7 +157,7 @@
+ class FileOpen : public TclCommand
+ {
+    protected:
+-      virtual int command(int argc, char *argv[]);
++      virtual int command(int argc, const char *argv[]);
+ 
+    public:
+       FileOpen(char *pzcName) : TclCommand(pzcName) {} 
+@@ -166,7 +166,7 @@
+ class FileSave : public TclCommand
+ {
+    protected:
+-      virtual int command(int argc, char *argv[]);
++      virtual int command(int argc, const char *argv[]);
+ 
+    public:
+       FileSave(char *pzcName) : TclCommand(pzcName) {} 
+@@ -175,7 +175,7 @@
+ class ListSave : public TclCommand // katie@ripe.net for peers save
+ {
+    protected:
+-      virtual int command(int argc, char *argv[]);
++      virtual int command(int argc, const char *argv[]);
+ 
+    public:
+       ListSave(char *pzcName) : TclCommand(pzcName) {} 
+@@ -184,7 +184,7 @@
+ class FileRevert : public TclCommand
+ {
+    protected:
+-      virtual int command(int argc, char *argv[]);
++      virtual int command(int argc, const char *argv[]);
+ 
+    public:
+       FileRevert(char *pzcName) : TclCommand(pzcName) {} 
+@@ -193,7 +193,7 @@
+ class FilePrint : public TclCommand
+ {
+    protected:
+-      virtual int command(int argc, char *argv[]);
++      virtual int command(int argc, const char *argv[]);
+ 
+    public:
+       FilePrint(char *pzcName) : TclCommand(pzcName) {} 
+@@ -203,7 +203,7 @@
+ class AddPeer : public TclCommand
+ {
+    protected:
+-      virtual int command(int argc, char *argv[]);
++      virtual int command(int argc, const char *argv[]);
+ 
+    public:
+       AddPeer(char *pzcName) : TclCommand(pzcName) {} 
+@@ -213,7 +213,7 @@
+ class DeletePeer: public TclCommand
+ {
+    protected:
+-      virtual int command(int argc, char *argv[]);
++      virtual int command(int argc, const char *argv[]);
+ 
+    public:
+       DeletePeer(char *pzcName) : TclCommand(pzcName) {} 
+@@ -223,7 +223,7 @@
+ class CreatePolicyTemplateMenu : public TclCommand
+ {
+    protected:
+-      virtual int command(int argc, char *argv[]);
++      virtual int command(int argc, const char *argv[]);
+ 
+    public:
+       CreatePolicyTemplateMenu(char *pzcName) : TclCommand(pzcName) {} 
+--- IRRToolSet-4.7.3/src/aoe/aoe.cc.orig	Tue Apr  9 13:48:46 2002
++++ IRRToolSet-4.7.3/src/aoe/aoe.cc	Wed Jul  9 09:56:04 2003
+@@ -365,7 +365,7 @@
+ int ListPeer::updateWindowTitle(TclApplication *pcTcl, int iCategory, 
+ 				char *pzcASNo)
+ {
+-   char *title, *dummy = "Shouldn't happen!";
++   const char *title, *dummy = "Shouldn't happen!";
+    char pzcBuffer[128];
+    AoeApplication *pcApp = (AoeApplication *)pcTcl;
+    switch (iCategory)
+@@ -566,7 +566,7 @@
+       // import
+       sprintf(pzcBuffer, "PolicyTemplate(%d,import)", iCategory - 4);
+       ss << "import: "
+-	 << substitute(pcApp->getVar(pzcBuffer), pzcMyAS, pzcPeerAS)
++	 << substitute((char*)pcApp->getVar(pzcBuffer), pzcMyAS, pzcPeerAS)
+ 	 << endl;
+       }
+    if (iExport)
+@@ -574,7 +574,7 @@
+       // export
+       sprintf(pzcBuffer, "PolicyTemplate(%d,export)", iCategory - 4);
+       ss << "export: "
+-	 << substitute(pcApp->getVar(pzcBuffer), pzcMyAS, pzcPeerAS)
++	 << substitute((char*)pcApp->getVar(pzcBuffer), pzcMyAS, pzcPeerAS)
+ 	 << endl;
+       }
+    // Fill the text widget
+@@ -626,7 +626,7 @@
+    return pzcBuffer;
+ }
+ 
+-int ListPeer::command(int argc, char *argv[])
++int ListPeer::command(int argc, const char *argv[])
+ {
+    if (argc != 2) return TCL_ERROR;
+    AoeApplication *pcApp = (AoeApplication *)getExtraArgument();
+@@ -723,7 +723,7 @@
+ }
+ 
+ 
+-int LoadBgpDump::command(int argc, char *argv[])
++int LoadBgpDump::command(int argc, const char *argv[])
+ {
+    if (argc != 2) return TCL_ERROR;
+    AoeApplication *pcApp = (AoeApplication *)getExtraArgument();
+@@ -748,10 +748,10 @@
+    return TCL_OK;
+ }
+ 
+-int UpdatePolicy::command(int argc, char *argv[])
++int UpdatePolicy::command(int argc, const char *argv[])
+ {
+    if (argc != 3) return TCL_ERROR;
+-   char *pzcOption = argv[1];
++   const char *pzcOption = argv[1];
+    int iTarget = atoi(argv[2]);
+    int iResult = TCL_ERROR;
+    if (strcmp(pzcOption, "append") == 0)
+@@ -801,7 +801,7 @@
+ }
+ */
+ 
+-int EditPolicyText::command(int argc, char *argv[])
++int EditPolicyText::command(int argc, const char *argv[])
+ {
+    if (argc != 1) return TCL_ERROR;
+    AoeApplication *pcApp = (AoeApplication *)getExtraArgument();
+@@ -819,7 +819,7 @@
+    return TCL_OK;
+ }
+ 
+-int ShowPolicyText::command(int argc, char *argv[])
++int ShowPolicyText::command(int argc, const char *argv[])
+ {
+    if (argc != 1) return TCL_ERROR;
+    AoeApplication *pcApp = (AoeApplication *)getExtraArgument();
+@@ -867,7 +867,7 @@
+    return TCL_OK;
+ }
+ 
+-int FileOpen::command(int argc, char *argv[])
++int FileOpen::command(int argc, const char *argv[])
+ {
+    if (argc != 2) return TCL_ERROR;
+    AoeApplication *pcApp = (AoeApplication *)getExtraArgument();
+@@ -898,7 +898,7 @@
+    return iResult;
+ }
+ 
+-int FileSave::command(int argc, char *argv[])
++int FileSave::command(int argc, const char *argv[])
+ {
+    if (argc != 2) return TCL_ERROR;
+    AoeApplication *pcApp = (AoeApplication *)getExtraArgument();
+@@ -910,7 +910,7 @@
+ }  
+ 
+ // by katie@ripe.net for saving the peer list with status
+-int ListSave::command(int argc, char *argv[])
++int ListSave::command(int argc, const char *argv[])
+ {  
+    if (argc != 2) return TCL_ERROR;
+    AoeApplication *pcApp = (AoeApplication *)getExtraArgument();
+@@ -930,7 +930,7 @@
+ }  
+ 
+ 
+-int FileRevert::command(int argc, char *argv[])
++int FileRevert::command(int argc, const char *argv[])
+ {
+    if (argc != 1) return TCL_ERROR;
+    AoeApplication *pcApp = (AoeApplication *)getExtraArgument();
+@@ -945,10 +945,10 @@
+    return TCL_OK;
+ }
+ 
+-int FilePrint::command(int argc, char *argv[])
++int FilePrint::command(int argc, const char *argv[])
+ {   
+    if (argc != 2) return TCL_ERROR;
+-   char *pzcCommand = argv[1];
++   const char *pzcCommand = argv[1];
+    AoeApplication *pcApp = (AoeApplication *)getExtraArgument();
+    const char *pzcText;
+    int iLen;
+@@ -972,7 +972,7 @@
+ }
+ 
+ 
+-int AddPeer::command(int argc, char *argv[])
++int AddPeer::command(int argc, const char *argv[])
+ {
+    if (argc != 2) return TCL_ERROR;
+    AoeApplication *pcApp = (AoeApplication *)getExtraArgument();
+@@ -987,7 +987,7 @@
+    return TCL_OK;
+ }
+ 
+-int DeletePeer::command(int argc, char *argv[])
++int DeletePeer::command(int argc, const char *argv[])
+ {
+    if (argc != 2) return TCL_ERROR;
+    AoeApplication *pcApp = (AoeApplication *)getExtraArgument();
+@@ -1041,7 +1041,7 @@
+ }
+ 
+ 
+-int CreatePolicyTemplateMenu::command(int argc, char *argv[])
++int CreatePolicyTemplateMenu::command(int argc, const char *argv[])
+ {
+    if (argc != 1) return TCL_ERROR;
+    AoeApplication *pcApp = (AoeApplication *)getExtraArgument();
+@@ -1049,14 +1049,14 @@
+    for (int i = pcApp->pcCategoryButton->getSize(); i > 4; i--)
+       pcApp->pcCategoryButton->del(i);
+    // Create menu
+-   char *pzcTotal = pcApp->getVar("PolicyTemplate(Total)");
++   const char *pzcTotal = pcApp->getVar("PolicyTemplate(Total)");
+    if (pzcTotal)
+       {
+       for (int i = 0; i < atoi(pzcTotal); i++)
+ 	 {
+ 	 char pzcBuffer[256];
+ 	 sprintf(pzcBuffer, "PolicyTemplate(%d,Description)", i);
+-	 if (!pcApp->pcCategoryButton->add(pcApp->getVar(pzcBuffer), 
++	 if (!pcApp->pcCategoryButton->add((char*)pcApp->getVar(pzcBuffer), 
+ 	      "listPeer [.body.aspeer.listbox.list curselection]"))
+ 	 return TCL_ERROR;
+ 	 }
