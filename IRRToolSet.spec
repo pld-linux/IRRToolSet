@@ -11,6 +11,7 @@ Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-gcc3.patch
 URL:		http://www.ripe.net/ripencc/pub-services/db/irrtoolset/index.html
 BuildRequires:	XFree86-devel
+BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	libstdc++-devel
@@ -18,8 +19,8 @@ BuildRequires:	tcl-devel >= 8.3.4-10
 BuildRequires:	tk-devel >= 8.3.4-5
 BuildRequires:	readline-devel
 Provides:	RAToolSet
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	RAToolSet
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 IRRToolSet is a suite of policy analysis tools. It is implemented in
