@@ -1,3 +1,7 @@
+#
+# Conditional build:
+%bcond_with	gcc33		# compile with gcc33
+#
 Summary:	IRRToolSet is a suite of policy analysis tools
 Summary(pl):	IRRToolSet jest zestawem narzêdzi do analizy polityki
 Name:		IRRToolSet
@@ -38,6 +42,11 @@ IRRToolSet jest zestawem narzêdzi do analizy polityki.
 
 %build
 cp -f /usr/share/automake/config.sub .
+%if %{with gcc33}
+%define __cc gcc33
+%define __cxx g++33
+%endif
+%define optflags %{__global_cflags}
 %configure2_13
 %{__make}
 
