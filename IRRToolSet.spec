@@ -2,7 +2,7 @@ Summary:	IRRToolSet is a suite of policy analysis tools
 Summary(pl):	IRRToolSet jest zestawem narzêdzi do analizy polityki
 Name:		IRRToolSet
 Version:	4.7.3
-Release:	1.1
+Release:	2
 License:	BSD-like
 Group:		Networking/Admin
 Source0:	ftp://ftp.ripe.net/ripe/tools/IRRToolSet/%{name}-%{version}.tar.gz
@@ -14,8 +14,8 @@ BuildRequires:	XFree86-devel
 BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	libstdc++-devel
-BuildRequires:	tcl-devel
-BuildRequires:	tk-devel
+BuildRequires:	tcl-devel >= 8.3.4-10
+BuildRequires:	tk-devel >= 8.3.4-5
 BuildRequires:	readline-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	RAToolSet
