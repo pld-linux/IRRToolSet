@@ -45,8 +45,8 @@ cp -f /usr/share/automake/config.sub .
 %if %{with gcc33}
 %define __cc gcc33
 %define __cxx g++33
+%define  optflags -O2 -g -pipe
 %endif
-%define optflags %{__global_cflags}
 %configure2_13
 %{__make}
 
