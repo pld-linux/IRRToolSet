@@ -17,6 +17,7 @@ BuildRequires:	libstdc++-devel
 BuildRequires:	tcl-devel >= 8.3.4-10
 BuildRequires:	tk-devel >= 8.3.4-5
 BuildRequires:	readline-devel
+Provides:	RAToolSet
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	RAToolSet
 
