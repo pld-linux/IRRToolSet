@@ -23,6 +23,10 @@ BuildRequires:	libstdc++-devel
 BuildRequires:	tcl-devel >= 8.3.4-10
 BuildRequires:	tk-devel >= 8.3.4-5
 BuildRequires:	readline-devel
+%if %{with gcc32}
+BuildRequires:	compat-gcc-32
+BuildRequires:	compat-gcc-32-c++
+%endif
 Provides:	RAToolSet
 Obsoletes:	RAToolSet
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
