@@ -1,6 +1,6 @@
 #
 # Conditional build:
-%bcond_with	gcc33		# compile with gcc33
+%bcond_with	gcc32		# compile with gcc32
 #
 Summary:	IRRToolSet is a suite of policy analysis tools
 Summary(pl):	IRRToolSet jest zestawem narzêdzi do analizy polityki
@@ -9,12 +9,12 @@ Version:	4.7.3
 Release:	3
 License:	BSD-like
 Group:		Networking/Admin
-Source0:	ftp://ftp.ripe.net/ripe/tools/IRRToolSet/%{name}-%{version}.tar.gz
+Source0:	ftp://ftp.isc.org/isc/IRRToolSet/IRRToolSet-%{version}/%{name}-%{version}.tar.gz
 # Source0-md5:	fcf8305464c8ae5886c41dcb8d85e53d
 Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-gcc3.patch
 Patch2:		%{name}-flex.patch
-URL:		http://www.ripe.net/ripencc/pub-services/db/irrtoolset/index.html
+URL:		http://www.isc.org/sw/IRRToolSet/
 BuildRequires:	XFree86-devel
 BuildRequires:	automake
 BuildRequires:	bison
@@ -42,10 +42,10 @@ IRRToolSet jest zestawem narzêdzi do analizy polityki.
 
 %build
 cp -f /usr/share/automake/config.sub .
-%if %{with gcc33}
-%define __cc gcc33
-%define __cxx g++33
-%define  optflags -O2 -g -pipe
+%if %{with gcc32}
+%define __cc gcc32
+%define __cxx g++32
+%define  optflags -O2 -g -pipe -Wno-deprecated
 %endif
 %configure2_13
 %{__make}
