@@ -6,7 +6,7 @@ Summary:	IRRToolSet is a suite of policy analysis tools
 Summary(pl):	IRRToolSet jest zestawem narzêdzi do analizy polityki
 Name:		IRRToolSet
 Version:	4.7.3
-Release:	3
+Release:	4
 License:	BSD-like
 Group:		Networking/Admin
 Source0:	ftp://ftp.isc.org/isc/IRRToolSet/IRRToolSet-%{version}/%{name}-%{version}.tar.gz
