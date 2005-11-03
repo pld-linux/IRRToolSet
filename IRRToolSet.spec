@@ -1,19 +1,16 @@
-#
-# Conditional build:
-%bcond_with	gcc32		# compile with gcc32
-#
 Summary:	IRRToolSet is a suite of policy analysis tools
 Summary(pl):	IRRToolSet jest zestawem narzêdzi do analizy polityki
 Name:		IRRToolSet
-Version:	4.7.3
-Release:	4
+Version:	4.8.2
+Release:	0.1
 License:	BSD-like
 Group:		Networking/Admin
-Source0:	ftp://ftp.isc.org/isc/IRRToolSet/IRRToolSet-%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	fcf8305464c8ae5886c41dcb8d85e53d
+Source0:	ftp://ftp.isc.org/isc/IRRToolSet/%{name}-%{version}/IRRToolSet-%{version}.tar.gz
+# Source0-md5:	04c24da4f3338a92d60ed055518c26a6
 Patch0:		%{name}-DESTDIR.patch
-Patch1:		%{name}-gcc3.patch
-Patch2:		%{name}-flex.patch
+Patch1:		%{name}-flex.patch
+Patch2:		%{name}-build-all.patch
+Patch3:		NE.cc-20040805.patch
 URL:		http://www.isc.org/sw/IRRToolSet/
 BuildRequires:	XFree86-devel
 BuildRequires:	automake
@@ -43,14 +40,10 @@ IRRToolSet jest zestawem narzêdzi do analizy polityki.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 cp -f /usr/share/automake/config.sub .
-%if %{with gcc32}
-%define __cc gcc32
-%define __cxx g++32
-%define  optflags -O2 -g -pipe -Wno-deprecated
-%endif
 %configure2_13
 %{__make}
 
@@ -62,7 +55,7 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_sbindir}
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+        DESTDIR=$RPM_BUILD_ROOT
 
 mv $RPM_BUILD_ROOT%{_bindir}/prtraceroute $RPM_BUILD_ROOT%{_sbindir}
 
