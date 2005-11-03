@@ -1,0 +1,20 @@
+diff -Naur IRRToolSet-original/src/normalform/NE.cc IRRToolSet/src/normalform/NE.cc
+--- IRRToolSet-original/src/normalform/NE.cc  2004-08-05 11:21:20.000000000 +0200
++++ IRRToolSet/src/normalform/NE.cc 2004-08-05 11:13:37.000000000 +0200
+@@ -1,4 +1,4 @@
+-//  $Id$
++//  $Id$
+ // Copyright (c) 2001,2002                        RIPE NCC
+ //
+ // All Rights Reserved
+@@ -355,7 +355,9 @@
+    if (typeid(*ptree) == typeid(FilterAFI)) {
+
+       ne = evaluate(((FilterAFI *) ptree)->f, peerAS, expand);
+-      ne->restrict((FilterAFI *) ptree);
++      if ((ne->singleton_flag == NormalTerm::PRFX) || 
++        (ne->singleton_flag == NormalTerm::IPV6_PRFX))
++        ne->restrict((FilterAFI *) ptree);
+       Debug(Channel(DBG_NOT) << "op1: " << *ne << "\n");
+       Debug(Channel(DBG_NOT) << "afi: " << *ne << "\n");
+       return ne;
