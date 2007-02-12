@@ -1,5 +1,5 @@
 Summary:	IRRToolSet is a suite of policy analysis tools
-Summary(pl):	IRRToolSet jest zestawem narzêdzi do analizy polityki
+Summary(pl.UTF-8):   IRRToolSet jest zestawem narzÄ™dzi do analizy polityki
 Name:		IRRToolSet
 Version:	4.8.2
 Release:	0.1
@@ -29,8 +29,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 IRRToolSet is a suite of policy analysis tools. It is implemented in
 C++ on a UNIX platform.
 
-%description -l pl
-IRRToolSet jest zestawem narzêdzi do analizy polityki.
+%description -l pl.UTF-8
+IRRToolSet jest zestawem narzÄ™dzi do analizy polityki.
 
 %prep
 %setup -q
