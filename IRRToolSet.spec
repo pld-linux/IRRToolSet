@@ -1,17 +1,15 @@
 Summary:	IRRToolSet is a suite of policy analysis tools
 Summary(pl.UTF-8):	IRRToolSet jest zestawem narzędzi do analizy polityki
 Name:		IRRToolSet
-Version:	4.8.2
-Release:	0.1
+Version:	4.8.5
+Release:	1
 License:	BSD-like
 Group:		Networking/Admin
 Source0:	ftp://ftp.isc.org/isc/IRRToolSet/%{name}-%{version}/IRRToolSet-%{version}.tar.gz
-# Source0-md5:	04c24da4f3338a92d60ed055518c26a6
+# Source0-md5:	30003e1c0403462d7e0148bca0674062
 Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-flex.patch
-Patch2:		%{name}-build-all.patch
-Patch3:		NE.cc-20040805.patch
-Patch4:		%{name}-gcc3.patch
+Patch2:		%{name}-gcc3.patch
 URL:		http://www.isc.org/sw/IRRToolSet/
 BuildRequires:	XFree86-devel
 BuildRequires:	automake
@@ -36,9 +34,7 @@ IRRToolSet jest zestawem narzędzi do analizy polityki.
 %setup -q
 %patch0 -p1
 %patch1 -p1
-#%patch2 -p1
-%patch3 -p1
-%patch4 -p1
+%patch2 -p1
 
 %build
 cp -f /usr/share/automake/config.sub .
